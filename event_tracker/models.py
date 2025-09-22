@@ -19,7 +19,7 @@ class EventLink(BaseModel):
     title: str
     url: str
 
-    def as_dict(self) -> dict:
+    def to_dict(self) -> dict:
         """Return a serialisable representation."""
         return self.model_dump()
 
@@ -33,13 +33,13 @@ class StoredEvent(BaseModel):
     url: str
     first_seen_at: str
 
-    def as_dict(self) -> dict:
+    def to_dict(self) -> dict:
         """Return a serialisable representation."""
         return self.model_dump()
 
     @classmethod
     def from_dict(cls, payload: dict) -> "StoredEvent":
-        return cls.model_validate(payload)
+        return cls.model_validate(payload or {})
 
     @classmethod
     def from_link(cls, link: EventLink, timestamp: datetime | None = None) -> "StoredEvent":
