@@ -1,17 +1,18 @@
 # Agent Notes
 
-## Technology Choices
-- Streamlit powers the interactive UI in `app.py`.
-- Pydantic v2 provides typed models within `event_tracker.models` and related modules.
-- Standard library modules handle networking (`urllib`), parsing, and persistence (JSON + filesystem).
+## 技術選定
+- `app.py`でStreamlitのUIを定義.
+- Pydantic v2 でデータモデルを定義.`event_tracker.models`と関連するモジュールにある.
+- ネットワーク(`urllib`)、パース、永続化(JSON + filesystem)は標準ライブラリを使用.
 
-## Directory Structure
-- `app.py`: Streamlit entry point for the prototype UI.
-- `event_tracker/`: Python package with fetcher, models, and storage logic.
-- `data/`: Local persistence location (JSON files).
-- `README.md`: Project overview and usage notes.
-- `requirements.txt`: Python dependencies for the application.
+## ディレクトリ構成
+- `app.py`: UIプロトタイプ（Streamlit）のエントリーポイント.
+- `event_tracker/`: fetcher, models, torage logicのPythonコード.
+- `data/`: 永続化ファイルの置き場所 (JSON).
+- `README.md`: プロジェクトの概要と使用上の注意点.
+- `requirements.txt`: Pythonの依存関係.
 
 ## Development Notes
-- When adding or updating models under `event_tracker/`, prefer Pydantic v2 `BaseModel` classes.
-- Keep the repository ready for a future database-backed storage layer; avoid tight coupling between storage and UI concerns.
+- - リポジトリ内のドキュメントは日本語で記述すること。
+- `event_tracker/` ディレクトリ以下にモデルを追加または更新する場合は、Pydantic v2 の `BaseModel` クラスを使用することを推奨します.
+- 将来的なデータベースベースのストレージ層への移行に備えてリポジトリを準備しておくとともに、ストレージ機能とユーザーインターフェース機能の間の密結合を避けるようにしてください.
