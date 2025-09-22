@@ -1,20 +1,43 @@
-# Tokyo Exhibition Watcher
+# Misc ツール集
 
-This is a Streamlit prototype that monitors the latest exhibition listings from [Tokyo Art Beat](https://www.tokyoartbeat.com/) for Tokyo.
+このリポジトリは、Streamlit を用いた実験的なユーティリティやプロトタイプをまとめたものです。アップロードしたドキュメントを対象に大規模言語モデル（LLM）と対話するチャット機能を中心に、社内検証や個人のアイデア検討をすばやく行えるようにしています。README の表現は、アプリ内で表示されるラベル（例: 「送信」「ファイルをアップロード」など）と揃えています。
 
-## Features
-- Fetch the latest event detail pages from the specified listing page.
-- Detect newly added event subpages when the user presses a button.
-- Persist detected events locally in `data/events.json` for future runs.
+## 主な機能
+- ドキュメントをアップロードして LLM とチャットし、回答を日本語で表示。
+- プロンプトのモードや回答スタイルを切り替えて応答のトーンを調整。
+- Streamlit サイドバーで温度や最大トークンなどのパラメータを操作。
 
-## Getting Started
-1. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-2. Run the Streamlit app:
-   ```bash
-   streamlit run app.py
-   ```
+## 必要条件
+- Python 3.10 以上
+- OpenAI 互換の API キー、または互換モデルのエンドポイント
+- 任意の仮想環境（venv、conda など）の利用を推奨
 
-The app stores fetched events in `data/events.json`. The file structure has been designed with future database migrations in mind.
+## セットアップ手順
+1. リポジトリをクローンし、仮想環境を作成・有効化します。
+2. プロジェクトで採用している方法（例: `pip`, `poetry`, `uv`）で依存パッケージをインストールします。
+3. `.env` あるいは環境変数で `OPENAI_API_KEY` を設定します。
+
+## アプリの起動
+Streamlit アプリは次のように起動できます。
+```bash
+streamlit run <エントリーポイント>.py
+```
+エントリーポイントのファイル名はプロジェクト構成に合わせて読み替えてください。起動後に表示される `http://localhost:8501` にアクセスし、「ファイルをアップロード」からドキュメントを読み込んで、チャット欄に質問を入力して「送信」を押せば会話が始まります。
+
+## カスタマイズのヒント
+- 設定ファイルやサイドバーでモデルや推論パラメータを調整できます。
+- プロンプトテンプレートや UI テキストを編集すると、回答スタイルや表示文言を簡単に変更できます。
+- 複数ページ構成の場合は、`pages/` ディレクトリに Streamlit スクリプトを追加するとアプリ内でタブ表示されます。
+
+## 開発ワークフロー
+- LLM との通信部分はサービス層に切り出しておくと差し替えが容易です。
+- UI と README の用語を統一したい場合は、国際化用のリソースファイル（例: `i18n/ja.yaml`）を参照すると便利です。
+- 単体テストには `pytest` を利用し、変更後に実行して回帰を防ぎましょう。
+
+## テスト
+```bash
+pytest
+```
+
+## コントリビュート
+Issue やプルリクエストによる改善提案を歓迎します。貢献の際は、既存コードや UI の文言と整合するように配慮してください。
